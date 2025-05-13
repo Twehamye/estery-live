@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<br>
+<div class="row">
+    <div class="col">
+        <h6 align="right"><a class="btn btn-success" href="#' %}">Export CSV</a></h6>
+        <h3 align="center">Search through Transactions:</h3>
+        <div class="card card-body">
+            <form method="get">
+                {{myFilter.form}}
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+ <div class = "col-md-12 text-center">
+    <div class="card card-body">
+        <h3 id="header-h2">Sales List</h3>
+        <a class="btn btn-primary btn-block" href="{% url 'create_sale' %}"> Add a New Sale</a><p></p>
+        <table class="table table-bordered border-primary table-hover">
+            
+                <!-- <th>STAFF ID</th> -->
+                <th>STAFF NAME</th>                
+                <th>BRANCH</th>
+                <th>DATE </th>
+                <th>ITEM </th>
+                <th>QUANTITY</th>
+                <th>UNIT PRICE</th>
+                <th>TOTAL AMOUNT</th>
+                <th>CUSTOMER</th>
+                <th>CUST_NO.</th>
+                <th>STATUS</th>
+                <th>UPDATE</th>
+                <th>REMOVE</th>
+            
+            {% for x in sales %}
+            <tr>
+                <!-- <td>{{ x.person_responsible.emp_id }}</td> -->
+                <td>{{ x.person_responsible.full_name }}</td>
+                <td>{{ x.branch }}</td>
+                <td>{{ x.date_of_sale }}</td>
+                <td>{{ x.item_name }}</td>
+                <td>{{ x.quantity }}</td>
+                <td>{{ x.unit_price|floatformat|intcomma }}</td>
+                <td>{{ x.total_amount|floatformat|intcomma }}</td>
+                <td>{{ x.customer_name }}</td>
+                <td>{{ x.customer_contact }}</td>
+                <td>{{ x.status }}</td>
+                
+                
+                <td><a class="btn btn-sm btn-info" href="{% url 'update_sale' x.id  %}">Update</a></td>
+                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_sale' x.id  %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            
+        </table>
+    </div><br>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+            
+{% endblock content %}

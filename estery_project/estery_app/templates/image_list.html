@@ -1,0 +1,50 @@
+<!-- {% extends 'main.html' %} -->
+{% load static %}
+
+{% block content %}
+
+    <section class="sub-header">
+        <nav>
+            <!-- <a href="#"><img src="{% static 'images/logo2.jpg' %}" style="width: 80px; height: 70px; border-radius: 50%;"></a> -->
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{% url 'index' %}">HOME</a></li>
+                    <li><a href="{% url 'about' %}">ABOUT</a></li>
+                    <li><a href="{% url 'product' %}">PRODUCTS</a></li>
+                    <li><a href="{% url 'contact' %}">CONTACT</a></li>  
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        
+    </section>
+    <nav>
+            <!-- <a href="#"><img src="{% static 'images/logo2.jpg' %}" style="width: 80px; height: 70px; border-radius: 50%;"></a> -->
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{% url 'index' %}">HOME</a></li>
+                    <li><a href="{% url 'about' %}">ABOUT</a></li>
+                    <li><a href="{% url 'product' %}">PRODUCTS</a></li>
+                    <li><a href="{% url 'contact' %}">CONTACT</a></li>  
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+<div class="row">
+    {% for image in images %}
+        <div class="col-md-4">
+            <p><strong>Item:</strong> {{ image.title }}</p>
+            <img src="{{ image.image.url }}" alt="{{ image.title }}" width="100%" height="200" object-fit="cover">
+            <p><strong>Description:</strong> {{ image.description }}</p>
+            <p><strong>Source: </strong>{{ image.tags }}</p>
+            
+            <a href="{% url 'edit_image' image.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_image' image.pk %}" class="btn btn-danger">Delete</a>
+         <hr>   
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

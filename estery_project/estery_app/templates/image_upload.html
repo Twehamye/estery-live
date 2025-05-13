@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+
+    <title>Stock Upload</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #camera-input {
+            display: none;
+        }
+        #camera-label {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #camera-label:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <div class="container">
+    <br>
+    <h1 align="center">New Stock Capture</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4" style="color: darkblue; text-align: center;">Enter a new Item details </legend>
+            {{ form|crispy }}
+        </fieldset><br>
+        <!-- <label id="camera-label" for="camera-input">Take a Photo</label>
+        <input id="camera-input" type="file" accept="image/*" capture="camera" name="image"> -->
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- <script>
+        // Get the file input and label elements
+        const fileInput = document.getElementById('camera-input');
+        const cameraLabel = document.getElementById('camera-label');
+
+        // Add an event listener to the file input
+        fileInput.addEventListener('change', (e) => {
+            // Get the selected file
+            const file = e.target.files[0];
+            // Update the label text
+            cameraLabel.textContent = file.name;
+        });
+    </script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+{% endblock content %}
